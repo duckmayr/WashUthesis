@@ -1,0 +1,80 @@
+%% Options for packages loaded elsewhere
+%% (taken from pandoc's default LaTeX template)
+\PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+
+$if(colorlinks)$
+    \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+$endif$
+
+%% Load memoir package, with 12 point font as required for WashU theses
+\documentclass[12pt]{memoir}
+
+%% Set margins
+%% There are supposed to be one-inch margins all around,
+%% with nothing, not even notes or page numbers,
+%% to appear in the margin;
+%% there is a related example in the memoir class documentation I follow closely
+\setlrmarginsandblock{1in}{1in}{*}
+\setlength{\headheight}{\onelineskip}
+\setlength{\headsep}{\baselineskip}
+\addtolength{\headsep}{-\topskip}
+\setlength{\uppermargin}{1in}
+\addtolength{\uppermargin}{\headheight}
+\addtolength{\uppermargin}{\headsep}
+\setlength{\lowermargin}{1in}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-\uppermargin}
+\addtolength{\textheight}{-\lowermargin}
+
+%% Set font; Times New Roman is recommended
+\usepackage{mathptmx}
+
+%% Add header includes
+$for(header-includes)$
+    $header-includes$
+$endfor$
+
+\begin{document}
+
+\clearpage
+{
+\thispagestyle{empty}
+\centering
+WASHINGTON UNIVERSITY IN ST. LOUIS\\[\baselineskip]
+
+$department$
+
+\vfill
+
+Dissertation Examination Comittee:\\
+$for(committee)$$committee$~\\~$endfor$
+
+\vfill
+
+$title$\\
+by\\
+$author$
+
+\vfill
+
+A dissertation presented to\\
+The Graduate School\\
+of Washington University in\\
+partial fulfillment of the\\
+requirements for the degree\\
+of Doctor of Philosophy
+
+\vfill
+
+$month$ $year$\\
+St.~Louis, Missouri
+
+}
+
+\clearpage
+
+$body$
+
+\end{document}
+

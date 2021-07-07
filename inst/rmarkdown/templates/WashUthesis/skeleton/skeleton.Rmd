@@ -1,0 +1,14 @@
+---
+title: "Your Title"
+author: "Your Name"
+department: "Your Department"
+month: "The month you'll graduate; should be one of December, May, or August"
+year: "The year you'll graduate"
+committee:
+    - "FirstName LastName, Chair"
+    - "FirstName LastName"
+    - "FirstName LastName"
+output:
+    WashUthesis::WashUthesis
+---
+
