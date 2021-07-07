@@ -7,28 +7,91 @@ $if(colorlinks)$
     \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 $endif$
 
-%% Load memoir package, with 12 point font as required for WashU theses
-\documentclass[12pt]{memoir}
+%% Load book package, with the following formatting requirements of WashU theses
+%% - 12pt font
+%% - one sided (odd and even pages don't have different headers/margins)
+%% - openany to allow chapters to start on even pages
+\documentclass[12pt, oneside, openany]{book}
+
+%% Provide color support
+\usepackage{xcolor}
+
+%% Add URL line breaks if available
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} 
+
+%% Setup hyperlinks and cross references
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+$if(title-meta)$
+  pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+  pdfauthor={$author-meta$},
+$endif$
+$if(lang)$
+  pdflang={$lang$},
+$endif$
+$if(subject)$
+  pdfsubject={$subject$},
+$endif$
+$if(keywords)$
+  pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
+$if(colorlinks)$
+  colorlinks=true,
+  linkcolor={$if(linkcolor)$$linkcolor$$else$Maroon$endif$},
+  filecolor={$if(filecolor)$$filecolor$$else$Maroon$endif$},
+  citecolor={$if(citecolor)$$citecolor$$else$Blue$endif$},
+  urlcolor={$if(urlcolor)$$urlcolor$$else$Blue$endif$},
+$else$
+  hidelinks,
+$endif$
+  pdfcreator={LaTeX via pandoc}
+}
+
 
 %% Set margins
 %% There are supposed to be one-inch margins all around,
 %% with nothing, not even notes or page numbers,
-%% to appear in the margin;
-%% there is a related example in the memoir class documentation I follow closely
-\setlrmarginsandblock{1in}{1in}{*}
-\setlength{\headheight}{\onelineskip}
-\setlength{\headsep}{\baselineskip}
-\addtolength{\headsep}{-\topskip}
-\setlength{\uppermargin}{1in}
-\addtolength{\uppermargin}{\headheight}
-\addtolength{\uppermargin}{\headsep}
-\setlength{\lowermargin}{1in}
-\setlength{\textheight}{\paperheight}
-\addtolength{\textheight}{-\uppermargin}
-\addtolength{\textheight}{-\lowermargin}
+%% to appear in the margin.
+\usepackage[
+paperwidth = 8.5in, paperheight = 11.0in,
+margin = 1.0in, includefoot
+]{geometry}
 
 %% Set font; Times New Roman is recommended
 \usepackage{mathptmx}
+
+%% Set spacing to double
+\usepackage{setspace}
+\doublespacing
+
+%% Alter the title of the table of contents
+\renewcommand{\contentsname}{Table of Contents}
+
+%% Ensure captions are single-spaced
+\usepackage{caption}
+
+%% Set notes to endnotes if the user wants that
+%% (though note they'll be responsible for adding \theendnotes
+%% at the end of every chapter since LaTeX doesn't know when a chapter ends)
+$if(endnotes)$
+    \usepackage{endnotes}
+    \let\footnote=\endnote
+$endif$
+
+%% Add dots between event chapters to the page numbers in the ToC if desired
+$if(tocdots)$
+    \usepackage{tocloft}
+    \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+$endif$
+
+%% Set up references
+\PassOptionsToPackage{natbib=true}{biblatex}
+\usepackage[authordate, backend = biber, noibid]{biblatex-chicago}
+$for(bibliography)$
+    \addbibresource{$bibliography$}
+$endfor$
 
 %% Add header includes
 $for(header-includes)$
@@ -37,44 +100,106 @@ $endfor$
 
 \begin{document}
 
+%% We need to make page numbers centered & on bottom of page
+\pagestyle{plain}
+
+%% Set page numbering to frontmatter-style (lowercase roman numerals)
+\frontmatter
+
+%% Make the title page; it needs to be single-spaced and unnumbered
 \clearpage
-{
 \thispagestyle{empty}
-\centering
-WASHINGTON UNIVERSITY IN ST. LOUIS\\[\baselineskip]
+\singlespacing
+\begin{center}
+    WASHINGTON UNIVERSITY IN ST.~LOUIS\\[\baselineskip]
 
-$department$
+    $department$
 
-\vfill
+    \vfill
 
-Dissertation Examination Comittee:\\
-$for(committee)$$committee$~\\~$endfor$
+    Dissertation Examination Comittee:\\
+    $for(committee)$$committee$~\\~$endfor$
 
-\vfill
+    \vfill
 
-$title$\\
-by\\
-$author$
+    $title$\\
+    by\\
+    $author$
 
-\vfill
+    \vfill
 
-A dissertation presented to\\
-The Graduate School\\
-of Washington University in\\
-partial fulfillment of the\\
-requirements for the degree\\
-of Doctor of Philosophy
+    A dissertation presented to\\
+    The Graduate School\\
+    of Washington University in\\
+    partial fulfillment of the\\
+    requirements for the degree\\
+    of $degree$
 
-\vfill
+    \vfill
 
-$month$ $year$\\
-St.~Louis, Missouri
-
-}
-
+    $month$ $year$\\
+    St.~Louis, Missouri
+\end{center}
 \clearpage
+
+%% Add a copyright page if the user requests it
+$if(copyright)$
+    \thispagestyle{empty}
+    \null
+    \vfill
+    \begin{center}
+        \textcopyright\ $author$
+    \end{center}
+    \vfill
+    \clearpage
+$endif$
+
+%% Next comes the table of contents (and lists of tables and figures)
+%% We need to make sure the page numbering here starts at ii
+\setcounter{page}{2}
+\tableofcontents
+\clearpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\clearpage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+%% Next is the acknowledgments page
+\clearpage
+\doublespacing
+\addcontentsline{toc}{chapter}{Acknowledgments}
+\begin{center}
+    \textbf{\Huge Acknowledgments}
+\end{center}
+    
+$acknowledgments$
+
+\hfill $author$\\
+\textit{Washington University in St.~Louis}\\
+\textit{$month$ $year$}
+
+%% Next is the abstract
+\clearpage
+\addcontentsline{toc}{chapter}{Abstract}
+\begin{center}
+    ABSTRACT OF THE DISSERTATION\\
+    $title$\\
+    by\\
+    $author$\\
+    $degree$\\
+    Washington University in St.~Louis, $year$\\
+    $for(committee)$$committee$~\\~$endfor$ %% FIXME: Only chair
+    $department$\\
+\end{center}
+$abstract$
+
+\mainmatter
 
 $body$
+
+\clearpage
+\printbibliography[heading=bibintoc]
 
 \end{document}
 
