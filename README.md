@@ -1,5 +1,7 @@
 # WashUthesis
 
+[![R-CMD-check](https://github.com/duckmayr/WashUthesis/workflows/R-CMD-check/badge.svg)](https://github.com/duckmayr/WashUthesis/actions)
+
 ## Installation
 
 You can install the development version from GitHub via
