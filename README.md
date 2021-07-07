@@ -2,6 +2,10 @@
 
 [![R-CMD-check](https://github.com/duckmayr/WashUthesis/workflows/R-CMD-check/badge.svg)](https://github.com/duckmayr/WashUthesis/actions)
 
+**WashUthesis** is an R package that provides an R Markdown format and template
+for a document that conforms to the requirements for theses/dissertations
+at Washington University in St. Louis.
+
 ## Installation
 
 You can install the development version from GitHub via
