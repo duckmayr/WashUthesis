@@ -12,8 +12,14 @@ devtools::install_github("duckmayr/WashUthesis")
 
 After installing this package,
 you can use the included R Markdown template in RStudio
-by going to File > New File > R Markdown > From Template, then selecting the WashU Thesis template.
-All the information the template needs are pre-filled with default or dummy values in the YAML header.
+by going to File > New File > R Markdown > From Template, then selecting the WashU Thesis template:
+
+![Screenshot of RStudio's R Markdown template selector](https://github.com/duckmayr/WashUthesis/blob/main/template-chooser.png?raw=true)
+
+All the information the template needs are pre-filled with default or dummy values in the YAML header:
+
+![Screenshot of the template skeleton's YAML header](https://github.com/duckmayr/WashUthesis/blob/main/yaml-header.png?raw=true)
+
 For the most part, these fields are self-explanatory, though here are a few things to note:
 
 - The `thesis` field, if set to `true`, will replace all references to a "dissertation" in the output to a reference to a "thesis"
