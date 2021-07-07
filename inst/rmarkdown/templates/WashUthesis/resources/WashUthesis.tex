@@ -17,7 +17,7 @@ $endif$
 \usepackage{xcolor}
 
 %% Add URL line breaks if available
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} 
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{}
 
 %% Setup hyperlinks and cross references
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
@@ -117,7 +117,7 @@ $endfor$
 
     \vfill
 
-    Dissertation Examination Comittee:\\
+    $if(thesis)$Thesis$else$Dissertation$endif$ Examination Comittee:\\
     $for(committee)$$committee$~\\~$endfor$
 
     \vfill
@@ -128,12 +128,12 @@ $endfor$
 
     \vfill
 
-    A dissertation presented to\\
+    A $if(thesis)$thesis$else$dissertation$endif$ presented to\\
     The Graduate School\\
     of Washington University in\\
     partial fulfillment of the\\
     requirements for the degree\\
-    of $degree$
+    of $degreeshort$
 
     \vfill
 
@@ -172,24 +172,35 @@ $endif$
 \begin{center}
     \textbf{\Huge Acknowledgments}
 \end{center}
-    
+
 $acknowledgments$
 
 \hfill $author$\\
 \textit{Washington University in St.~Louis}\\
 \textit{$month$ $year$}
 
+%% Then we include a dedication page (with *no* TOC entry) if requested
+$if(dedication)$
+    \clearpage
+    \null
+    \vfill
+    \begin{center}
+        $dedication-text$
+    \end{center}
+    \vfill
+$endif$
+
 %% Next is the abstract
 \clearpage
 \addcontentsline{toc}{chapter}{Abstract}
 \begin{center}
-    ABSTRACT OF THE DISSERTATION\\
+    ABSTRACT OF THE $if(thesis)$THESIS$else$DISSERTATION$endif$\\
     $title$\\
     by\\
     $author$\\
     $degree$\\
     Washington University in St.~Louis, $year$\\
-    $for(committee)$$committee$~\\~$endfor$ %% FIXME: Only chair
+    $for(chair)$$chair$~\\~$endfor$
     $department$\\
 \end{center}
 $abstract$

@@ -1,8 +1,56 @@
 #' WashU Thesis R Markdown Output Format
 #'
+#' This R Markdown format takes a lot of typesetting options out of the hands
+#' of the user in order to comply with the detailed requirements of theses
+#' at Washington University in St. Louis.
+#' There are several YAML options that should all be filled out
+#' (the are included in the skeleton, so dummy values should already be
+#' present when you start a new document from the template):
+#' \describe{
+#'     \item{title}{The title of your dissertation}
+#'     \item{author}{Your full name as recorded in WebSTAC}
+#'     \item{authorshort}{Your last/family name}
+#'     \item{department}{Your academic unit
+#'         (e.g. Deparment of Political Science)}
+#'     \item{degree}{What degree is to be conferred?
+#'         (e.g. Doctor of Philosophy in Chemistry)}
+#'     \item{degreeshort}{Your degree title absent your program
+#'         (e.g. Doctor of Philosophy)}
+#'     \item{thesis}{Should all references to dissertation be replaced with
+#'         references to thesis? (Default is false)}
+#'     \item{month}{The month you'll graduate;
+#'         should be one of December, May, or August}
+#'     \item{year}{The year you'll graduate}
+#'     \item{committee}{An itemized list of your committee members}
+#'     \item{chair}{An itemized list giving the chair(s) of your committee}
+#'     \item{copyright}{Should a copyright page be added? (Default is true)}
+#'     \item{dedication}{Should a dedication page be added? (Default is false)}
+#'     \item{dedication-text}{The text of your dedication}
+#'     \item{endnotes}{Should footnotes be converted to endnotes?
+#'         (Default is false).
+#'         Please note that if endnotes is true, the dissertation style guide
+#'         specifies that endnotes must be placed at the end of each chapter,
+#'         and since unfortunately LaTeX doesn't know when a chapter ends,
+#'         you will be responsible for adding `\\theendnotes'
+#'         at the end of each chapter.}
+#'     \item{tocdots}{Should leader dots connect even chapter titles
+#'         to page numbers in the table of contents? (Default is true).
+#'         (Note that leader dots will connect sections & lower either way).}
+#'     \item{acknowledgments}{The text of your acknowledgments}
+#'     \item{abstract}{The text of your abstract}
+#'     \item{bibliography}{The path to your bibiography.
+#'         Please note biblatex is used;
+#'         this should not affect your citation commands while typing
+#'         (the bookdown syntax of @citekey etc will work),
+#'         and shouldn't affect your bib file if you typically use bibtex,
+#'         but in some cases there may be extra features from biblatex
+#'         you can take advantage of in your bibfile.}
+#' }
+#'
 #' @param ... Arguments passed to \code{\link[bookdown]{pdf_book}}
 #'
 #' @return An R Markdown output format
+#' @importFrom bookdown pdf_book
 #' @export
 WashUthesis <- function(...) {
     template <- system.file(
@@ -14,6 +62,7 @@ WashUthesis <- function(...) {
             ...,
             template = template,
             pandoc_args = "--top-level-division=chapter",
+            citation_package = "biblatex",
             toc_appendix = TRUE
         )
     )
