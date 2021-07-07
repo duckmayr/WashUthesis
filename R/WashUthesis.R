@@ -50,6 +50,13 @@
 #' @param ... Arguments passed to \code{\link[bookdown]{pdf_book}}
 #'
 #' @return An R Markdown output format
+#' @examples
+#' \dontrun{
+#' library(rmarkdown)
+#' library(WashUthesis)
+#'
+#' render("input.Rmd", WashUthesis())
+#' }
 #' @importFrom bookdown pdf_book
 #' @export
 WashUthesis <- function(...) {

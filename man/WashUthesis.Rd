@@ -60,3 +60,11 @@ but in some cases there may be extra features from biblatex
 you can take advantage of in your bibfile.}
 }
 }
+\examples{
+\dontrun{
+library(rmarkdown)
+library(WashUthesis)
+
+render("input.Rmd", WashUthesis())
+}
+}
