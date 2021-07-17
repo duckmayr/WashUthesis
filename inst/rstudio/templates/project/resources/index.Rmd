@@ -1,0 +1,39 @@
+---
+site: bookdown::bookdown_site
+title: "Your Title"
+author: "Your Full Name as Recorded in WebSTAC"
+authorshort: "Your Last Name"
+department: "Your Department"
+degree: "Doctor of Philosophy in Political Science"
+degreeshort: "Doctor of Philosophy"
+thesis: false
+month: "The month you'll graduate; should be one of December, May, or August"
+year: "The year you'll graduate"
+committee:
+    - "FirstName LastName, Chair"
+    - "FirstName LastName"
+    - "FirstName LastName"
+chair:
+    - "FirstName LastName, Chair"
+copyright: true
+dedication: false
+dedication-text: ""
+endnotes: false
+tocdots: true
+acknowledgments: "An acknowledgments page must be included in your final dissertation or thesis. If you wish to include a special dedication you can either use it to close the acknowledgments page or place it on the page that immediately follows. The acknowledgments page should be listed in the table of contents. Place it after the final list used in the document, and before any dedication, abstract, or epigraph that is included. It is appropriate to acknowledge sources of academic and financial support; some fellowships and grants require acknowledgment."
+abstract: "An abstract is required for all dissertation submissions in ProQuest. An abstract is optional for master's thesis submissions."
+bibliography: ""
+---
+
+# First Chapter Title
+
+First chapter text should go here.
+Subsequent chapters' should go in their own files with no YAML frontmatter;
+those files should begin with a top-level heading (`#`).
+If you want each chapter to have its code chunks run in a fresh R session,
+create a file called `_bookdown.yml` and add a line there `new_session: yes`.
+By default, when you build the output of this project,
+it will create the output in `_book/_main.pdf`;
+you can override this default in `_bookdown.yml`
+with `book_filename: my-book-name.md`.
+More information about using bookdown can be found at https://bookdown.org/.
