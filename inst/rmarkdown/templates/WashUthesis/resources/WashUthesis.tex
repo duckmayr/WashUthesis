@@ -23,6 +23,27 @@ $endif$
 %% Add URL line breaks if available
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{}
 
+%% Allow customizing page numbers starting with appendices
+\usepackage{fancyhdr}
+\let\OldAppendix\appendix
+\renewcommand{\appendix}{
+    \clearpage
+    \OldAppendix
+    \fancypagestyle{plain}{%
+        \fancyhf{}% clear all header and footer fields
+        \fancyfoot[C]{[\thepage]} % except the center
+        \renewcommand{\headrulewidth}{0pt}%
+        \renewcommand{\footrulewidth}{0pt}%
+    }
+    \fancypagestyle{appendixpage}{%
+        \fancyhf{}% clear all header and footer fields
+        \fancyfoot[C]{[\thepage]} % except the center
+        \renewcommand{\headrulewidth}{0pt}%
+        \renewcommand{\footrulewidth}{0pt}%
+    }
+    \pagestyle{appendixpage}
+}
+
 %% Setup hyperlinks and cross references
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
@@ -205,7 +226,6 @@ $endif$
     $degree$\\
     Washington University in St.~Louis, $year$\\
     $for(chair)$$chair$~\\~$endfor$
-    $department$\\
 \end{center}
 $abstract$
 
