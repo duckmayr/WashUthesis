@@ -23,6 +23,7 @@ tocdots: true
 acknowledgments: "An acknowledgments page must be included in your final dissertation or thesis. If you wish to include a special dedication you can either use it to close the acknowledgments page or place it on the page that immediately follows. The acknowledgments page should be listed in the table of contents. Place it after the final list used in the document, and before any dedication, abstract, or epigraph that is included. It is appropriate to acknowledge sources of academic and financial support; some fellowships and grants require acknowledgment."
 abstract: "An abstract is required for all dissertation submissions in ProQuest. An abstract is optional for master's thesis submissions."
 bibliography: ""
+appendix: false
 ---
 
 # First Chapter Title

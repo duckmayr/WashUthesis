@@ -58,6 +58,11 @@ this should not affect your citation commands while typing
 and shouldn't affect your bib file if you typically use bibtex,
 but in some cases there may be extra features from biblatex
 you can take advantage of in your bibfile.}
+\item{appendix}{Does your dissertation or thesis have one or more
+appendices? The default is false. The correct value must be
+supplied in the YAML header to ensure proper placement of the
+bibliography.
+}
 }
 }
 \examples{
