@@ -64,7 +64,7 @@ margin = 1.0in, includefoot
 ]{geometry}
 
 %% Set font; Times New Roman is recommended
-\usepackage{mathptmx}
+\usepackage{newtxtext}
 
 %% Set spacing to double
 \usepackage{setspace}
@@ -184,7 +184,7 @@ $if(copyright)$
     \null
     \vfill
     \begin{center}
-        \textcopyright\ $author$
+        \textcopyright\ $year$ $author$
     \end{center}
     \vfill
     \clearpage
@@ -192,12 +192,15 @@ $endif$
 
 %% Next comes the table of contents (and lists of tables and figures)
 %% We need to make sure the page numbering here starts at ii
+\cleardoublepage
 \setcounter{page}{2}
+\pdfbookmark{\contentsname}{toc}
 \tableofcontents
 
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{List of Figures}
+\setstretch{1.15}
 \listoffigures
 
 \cleardoublepage
